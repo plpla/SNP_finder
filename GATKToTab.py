@@ -1,14 +1,29 @@
 #! /usr/bin/env python
 # -*- coding:Utf-8 -*-
 #Author: Pier-Luc Plante
-#License:GPL
+#License:GPLV3
+
+"""
+ This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You have received a copy of the GNU General Public License
+along with this program (gpl-3.0.txt).
+see <http://www.gnu.org/licenses/>
+
+"""
 
 """
 This program is created to be part of SNPs detection pipeline.
-It is created to replace the original perl script by FR.
-Since i don't know Perl, it's easier to create my own version 
-and adapt it to my needs.
-Usage: python BamToTab.py Reference.fasta GATK.out 
+Converts GATK output to a more friendly tsv format with a high fequency SNP call.
+Print output to stdout.
+Usage: python GATKToTab.py reference.fasta table.GATK 
 """
 
 import sys
@@ -90,12 +105,6 @@ i=0
 #print("start of the dict completion")	#for debogue
 while i < len(tabDict):
 	tabDict[i].total=tabDict[i].numA+tabDict[i].numG+tabDict[i].numC+tabDict[i].numT
-	#fill the total attribut
-	#if tabDict[i].total!=0:
-	#	tabDict[i].numA=float(tabDict[i].numA)/tabDict[i].total
-	#	tabDict[i].numT=float(tabDict[i].numT)/tabDict[i].total
-	#	tabDict[i].numG=float(tabDict[i].numG)/tabDict[i].total###
-	#	tabDict[i].numC=float(tabDict[i].numC)/tabDict[i].total
 	#fill the now attribut
 	if tabDict[i].total==0:
 		tabDict[i].now=tabDict[i].ref
@@ -138,15 +147,6 @@ while i < len(tabDict):
 #################
 
 #print("start to print the results")	#for debogue
-#position=0		
-#numA=0
-#numT=0
-#numG=0
-#numC=0
-#total=0
-#ref=''
-#now=''
-#type=""
 i=0
 print("Pos\tA\tT\tC\tG\tTotal\tReference\tNow\tType")
 while i<len(tabDict):
@@ -154,11 +154,4 @@ while i<len(tabDict):
 	"\t"+str(tabDict[i].numC)+"\t"+str(tabDict[i].numG)+"\t"+str(tabDict[i].total)+
 	"\t"+str(tabDict[i].ref)+"\t"+str(tabDict[i].now)+"\t"+str(tabDict[i].type))
 	i+=1
-
-
-
-	
-	
-	
-	
 
